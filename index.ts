@@ -6,13 +6,17 @@ const defaultOptions = {
   delay: 0,
 };
 
-export default async function retry(fn: Function, options: Partial<typeof defaultOptions> = defaultOptions) {
+export default async function retry(
+  fn: Function,
+  options: Partial<typeof defaultOptions> = defaultOptions,
+  ...args: any[]
+) {
   const delay = options.delay || defaultOptions.delay;
   let times = options.times || defaultOptions.times;
 
   while (times >= 0) {
     try {
-      return await fn();
+      return await fn(...args);
     } catch (e) {
       console.log(`retry`, (options.times || defaultOptions.times) - times, e);
       times--;

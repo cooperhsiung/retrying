@@ -3,12 +3,13 @@
  */
 import retry from '../index';
 
-async function test() {
+async function test(a: number, b: boolean) {
+  console.log(a, b);
   throw new Error('12123');
   // return 1;
 }
 
-retry(test, { delay: 1000 })
+retry(test, { delay: 1000 }, 1, true)
   .then((ret) => {
     console.log(ret);
   })
