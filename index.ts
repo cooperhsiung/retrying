@@ -18,7 +18,10 @@ export default async function retry(
     try {
       return await fn(...args);
     } catch (e) {
-      console.log(`retry`, (options.times || defaultOptions.times) - times, e);
+      if (times === 0) {
+        throw e;
+      }
+      console.log(`retry left`, times, e);
       times--;
       if (delay) {
         await sleep(delay);
