@@ -3,7 +3,7 @@
 [![NPM Version][npm-image]][npm-url]
 [![Node Version][node-image]][node-url]
 
-make resource pooling
+retry a function
 
 ## Installation
 
@@ -13,6 +13,23 @@ npm i retrying -S
 
 ## Usage
 
+```typescript
+import retry from 'retrying';
+// for commonjs -> const retry = require('retrying').default;
+
+function test() {
+  throw new Error('12123');
+  // return 1;
+}
+
+retry(test, { delay: 1000 })
+  .then((ret) => {
+    console.log(ret);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+```
 
 ## Examples
 
@@ -21,9 +38,6 @@ examples are listed at [examples](https://github.com/cooperhsiung/retrying/tree/
 ## Todo
 
 - [ ] xx
-
-## Others
-
 
 ## License
 
